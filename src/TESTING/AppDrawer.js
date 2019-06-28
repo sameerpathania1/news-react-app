@@ -88,8 +88,6 @@ export default function PersistentDrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [values, setValue] = React.useState([]);
-  const [values2, setValue2] = React.useState([]);
-  const [combine, setCombine] = React.useState([]);
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -104,29 +102,11 @@ export default function PersistentDrawerLeft() {
     Axios.get("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=b002a1635d0246319bad4f7f8fb577c8")
       .then(res => {
         setValue(res.data.articles)
-        newsapi2()
       }).catch(err => console.log(err, "something went wrong"))
   }
-
-  function newsapi2() {
-    console.log("clicked second time")
-    Axios.get("https://newsapi.org/v2/everything?q=apple&from=2019-06-27&to=2019-06-27&sortBy=popularity&apiKey=b002a1635d0246319bad4f7f8fb577c8")
-      .then(res2 => {
-        setValue2(res2.data.articles)
-        combinevalues()
-      }).catch(err => console.log(err, "something went wrong"))
-  }
-  function combinevalues() {
-    setCombine([...values , ...values2])
-  }
-
   function deletenews() {
     setValue([])
   }
-
-  
-
-  console.log(combine, "data in news api")
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -197,9 +177,9 @@ export default function PersistentDrawerLeft() {
           <Button onClick={deletenews} variant="contained" color="primary" className={classes.button}>
             Delete News
           </Button>
-          <Row >
+        <Row style={{textAlign: "center"}}>
             <Masonry>
-              {combine.map((data, index) =>
+              {values.map((data, index) =>
                 <Newscard
                   key={index}
                   imgurl={data.urlToImage}

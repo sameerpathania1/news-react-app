@@ -17,7 +17,7 @@ function Newscard(props) {
         <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={imgurl} />
       </Col>
       <Col>
-        <p>{time}</p>
+        <p style={{ float: "left" }} >{time}</p>
       </Col>
       <Col>
         <p>{title}</p>

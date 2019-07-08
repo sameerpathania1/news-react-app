@@ -6,7 +6,12 @@ import Masonry from 'react-masonry-component';
 function Newscard(props) {
   const styles = {
     float: "left",
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50 %, -50 %)',
     width: '30%',
+    height: 400,
     margin: 5,
     padding: 10,
   }
@@ -14,13 +19,10 @@ function Newscard(props) {
   return (
     <Paper style={styles}>
       <Col>
-        <img style={{ maxWidth: "100%", maxHeight: "100%" }} src={imgurl} />
+        <img style={{ Width: "100%", Height: "100%" }} src={imgurl} />
       </Col>
       <Col>
-        <p style={{ float: "left" }} >{time}</p>
-      </Col>
-      <Col>
-        <p>{title}</p>
+        <p style={{}} >{title}</p>
       </Col>
     </Paper>
 

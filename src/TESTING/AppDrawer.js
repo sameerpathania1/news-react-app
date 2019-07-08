@@ -129,6 +129,7 @@ export default function PersistentDrawerLeft() {
           <Typography variant="h6" noWrap>
             Persistent drawer
           </Typography>
+          <Button variant="primary" style={{float: "right"}} >LOGIN</Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -177,7 +178,7 @@ export default function PersistentDrawerLeft() {
           <Button onClick={deletenews} variant="contained" color="primary" className={classes.button}>
             Delete News
           </Button>
-        <Row style={{textAlign: "center"}}>
+        <Row>
             <Masonry>
               {values.map((data, index) =>
                 <Newscard

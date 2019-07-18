@@ -1,31 +1,34 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
-import { Paper } from '@material-ui/core';
-import Masonry from 'react-masonry-component';
+import { Row, Col, Modal } from 'react-bootstrap';
+import { Grid ,Paper } from '@material-ui/core';
+
 
 function Newscard(props) {
   const styles = {
     float: "left",
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50 %, -50 %)',
-    width: '30%',
-    height: 400,
+    width: "32.4%",
+    maxHeight: "100%",
     margin: 5,
-    padding: 10,
+    padding: 10
   }
+
   const { imgurl, details, time, title } = props
   return (
-    <Paper style={styles}>
-      <Col>
-        <img style={{ Width: "100%", Height: "100%" }} src={imgurl} />
-      </Col>
-      <Col>
-        <p style={{}} >{title}</p>
-      </Col>
-    </Paper>
-
+    <Grid container style={styles}>
+      <Grid item xs={12} sm={12} md={12}>
+        <p><strong>Time: </strong>{time}</p>
+      </Grid>
+      <Grid item xs={12} sm={12} md={12} >
+        { imgurl && imgurl.length ? <img style={{width: "100%"}} src={imgurl} alt="no image"/> : 
+        <div style={{width: "100%", textAlign: "center", justifyContent: "center"}} >NO IMAGE</div> }
+      </Grid>
+      <Grid item xs={12} sm={12} md={12} >
+        <p><strong>Title: </strong>{title}</p>
+      </Grid>
+    </Grid>
   )
 }
+
+
+
 export default Newscard;

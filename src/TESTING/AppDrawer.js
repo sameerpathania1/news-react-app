@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -19,15 +19,16 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Axios from "axios"
 import Button from '@material-ui/core/Button';
-import Newscard from "./Newscard"
 import { Col, Row } from 'react-bootstrap';
 import Masonry from 'react-masonry-component';
+import { business_news } from "../constants/newsApiLinks"
+import Newscard from "./Newscard";
 
 const drawerWidth = 240;
-
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    backgroundColor: "#ECEFF0"
   },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
@@ -99,9 +100,10 @@ export default function PersistentDrawerLeft() {
 
   function newsapi() {
     console.log("clicked")
-    Axios.get("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=b002a1635d0246319bad4f7f8fb577c8")
+    Axios.get(business_news)
       .then(res => {
         setValue(res.data.articles)
+        console.log(res.data.articles, "res data")
       }).catch(err => console.log(err, "something went wrong"))
   }
   function deletenews() {
@@ -127,7 +129,7 @@ export default function PersistentDrawerLeft() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Persistent drawer
+            Welcome to NewsApp
           </Typography>
           <Button variant="primary" style={{float: "right"}} >LOGIN</Button>
         </Toolbar>
@@ -178,7 +180,7 @@ export default function PersistentDrawerLeft() {
           <Button onClick={deletenews} variant="contained" color="primary" className={classes.button}>
             Delete News
           </Button>
-        <Row>
+        <div style={{padding: 0, margin: 0}}>
             <Masonry>
               {values.map((data, index) =>
                 <Newscard
@@ -190,7 +192,7 @@ export default function PersistentDrawerLeft() {
                   author={data.author}
                 />)}
             </Masonry>
-          </Row>
+          </div>
         </div>
       </div>
   );
